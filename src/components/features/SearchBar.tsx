@@ -1,6 +1,16 @@
+"use client";
+
 import Image from "next/image";
 
-export default function SearchBar() {
+export default function SearchBar({
+  searchTerm,
+  setSearchTerm,
+  placeholderText,
+}) {
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
     <div className="flex items-center gap-4 my-6 xl:mt-[33px] xl:mb-[41px]">
       <Image
@@ -11,8 +21,10 @@ export default function SearchBar() {
         src="/images/icon-search.svg"
       />
       <input
+        value={searchTerm}
+        onChange={handleChange}
         className="flex-1 bg-transparent font-light text-[16px] text-white placeholder:text-white placeholder:opacity-50 focus:outline-none md:text-2xl"
-        placeholder="Search for movies or TV series"
+        placeholder={placeholderText}
       />
     </div>
   );
