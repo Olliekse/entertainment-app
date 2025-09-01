@@ -4,21 +4,24 @@ import BookmarkButton from "@/components/bookmarks/BookmarkButton";
 
 interface MediaCardProps {
   item: ContentItem;
+  type?: string;
 }
 
-export default function MediaCard({ item }: MediaCardProps) {
+export default function MediaCard({ item, type }: MediaCardProps) {
   if (!item || !item.title || !item.imdbID) {
     return null;
   }
 
   return (
-    <div className="w-[164px] rounded-lg overflow-hidden hover:bg-[#1f2937] transition-colors duration-200">
+    <div
+      className={`${type === "trending" ? "w-[240px]" : "w-[164px]"} rounded-lg hover:bg-[#1f2937] transition-colors duration-200 flex-shrink-0`}
+    >
       <div className="relative">
         {item.poster && item.poster !== "N/A" ? (
           <img
             src={item.poster}
             alt={item.title}
-            className="w-full h-[110px] object-cover rounded-lg"
+            className={`w-full ${type === "trending" ? "h-[140px]" : "h-[110px]"} object-cover rounded-lg`}
           />
         ) : (
           <div className="w-full h-48 bg-gray-700 flex items-center justify-center">

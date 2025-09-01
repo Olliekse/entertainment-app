@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Recommended() {
   return (
-    <div className="pt-6">
+    <div className="pt-6 px-4 md:px-0 ">
       <h1 className="font-light text-xl text-white md:text-[32px]">
         Recommended for you
       </h1>

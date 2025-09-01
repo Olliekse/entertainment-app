@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import "@/app/globals.css";
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
 
 const navItems = [
   {
@@ -30,7 +29,7 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const [active, setActive] = useState();
+  const [active, setActive] = useState("home");
 
   const handleClick = (id) => {
     setActive(id);
@@ -38,7 +37,7 @@ export default function Navbar() {
 
   return (
     <nav className="relative bg-[#161d2f] px-4 py-4.5 xl:pt-[33px] flex xl:flex-col justify-between items-center xl:mb-8 md:rounded-[20px]">
-      <Link href="/public" aria-label="Home">
+      <Link onClick={() => setActive("home")} href="/" aria-label="Home">
         <Image
           className="w-[25px] h-[20px] md:w-8 md:h-[25px]"
           width={25}

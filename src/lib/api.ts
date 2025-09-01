@@ -4,7 +4,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_OMDB_URL!;
 export async function fetchMovies(type: string) {
   try {
     const res = await fetch(
-      `${BASE_URL}?apikey=${API_KEY}&s=movie&type=${type}`,
+      `${BASE_URL}?apikey=${API_KEY}&s=movie&type=${type}`
     );
     if (!res.ok) throw new Error("Failed to fetch movies");
     const data = await res.json();
@@ -23,7 +23,7 @@ export async function fetchMovies(type: string) {
 export async function fetchTVSeries(type: string) {
   try {
     const res = await fetch(
-      `${BASE_URL}?apikey=${API_KEY}&s=series&type=${type}`,
+      `${BASE_URL}?apikey=${API_KEY}&s=series&type=${type}`
     );
     if (!res.ok) throw new Error("Failed to fetch TV series");
     const data = await res.json();
@@ -43,7 +43,7 @@ export async function fetchTVSeries(type: string) {
 export async function searchContent(query: string, type: string) {
   try {
     const res = await fetch(
-      `${BASE_URL}?apikey=${API_KEY}&s=${encodeURIComponent(query)}&type=${type}`,
+      `${BASE_URL}?apikey=${API_KEY}&s=${encodeURIComponent(query)}&type=${type}`
     );
     if (!res.ok) throw new Error("Failed to search content");
     const data = await res.json();
@@ -62,7 +62,7 @@ export async function searchContent(query: string, type: string) {
 export async function fetchContentById(imdbId: string) {
   try {
     const res = await fetch(
-      `${BASE_URL}?apikey=${API_KEY}&i=${encodeURIComponent(imdbId)}`,
+      `${BASE_URL}?apikey=${API_KEY}&i=${encodeURIComponent(imdbId)}`
     );
     if (!res.ok) throw new Error("Failed to fetch content by ID");
     const data = await res.json();

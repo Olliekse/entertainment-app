@@ -9,7 +9,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   return (
-    <div className="px-4 md:px-0">
+    <div className="">
       <SearchBar
         setSearchTerm={setSearchTerm}
         searchTerm={searchTerm}

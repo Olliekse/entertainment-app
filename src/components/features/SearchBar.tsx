@@ -12,7 +12,7 @@ export default function SearchBar({
   };
 
   return (
-    <div className="flex items-center gap-4 my-6 xl:mt-[33px] xl:mb-[41px]">
+    <div className="flex items-center gap-4 my-6 xl:mt-[33px] xl:mb-[41px] px-4 md:px-0">
       <Image
         className="w-6 h-6 md:h-8 md:w-8"
         height={24}
