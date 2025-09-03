@@ -1,6 +1,7 @@
 import Image from "next/image";
+import React from "react";
 
-export default function Recommended() {
+function Recommended() {
   return (
     <div className="pt-6 px-4 md:px-0 ">
       <h1 className="font-light text-xl text-white md:text-[32px]">
@@ -215,3 +216,5 @@ export default function Recommended() {
     </div>
   );
 }
+
+export default React.memo(Recommended);

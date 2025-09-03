@@ -2,7 +2,7 @@
 
 import SearchBar from "@/components/features/SearchBar";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import MediaCard from "@/components/ui/MediaCard";
 import { useBookmarksStore } from "@/features/bookmarks/useBookmarksStore";
 import { useMovies } from "@/features/movies/hooks";
@@ -14,6 +14,8 @@ import { ContentItem } from "@/lib/types";
 export default function Bookmarks() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const { bookmarks } = useBookmarksStore();
+
+  const memoizedBookmarks = useMemo(() => bookmarks, [bookmarks]);
 
   const {
     data: searchMovies,
@@ -29,11 +31,11 @@ export default function Bookmarks() {
 
   const { data: bookmarkedMoviesData, isLoading: isLoadingBookmarkedMovies } =
     useQuery({
-      queryKey: ["bookmarkedMovies", bookmarks],
+      queryKey: ["bookmarkedMovies", memoizedBookmarks.join(",")],
       queryFn: async () => {
-        if (!bookmarks || bookmarks.length === 0) return [];
+        if (!memoizedBookmarks || memoizedBookmarks.length === 0) return [];
 
-        const moviePromises = bookmarks.map(async (bookmarkId) => {
+        const moviePromises = memoizedBookmarks.map(async (bookmarkId) => {
           try {
             const movie = await fetchContentById(bookmarkId);
             if (movie && movie.imdbID && movie.Type === "movie") {
@@ -54,16 +56,18 @@ export default function Bookmarks() {
         const results = await Promise.all(moviePromises);
         return results.filter((movie): movie is ContentItem => movie !== null);
       },
-      enabled: bookmarks.length > 0,
+      enabled: memoizedBookmarks.length > 0,
+      staleTime: 1000 * 60 * 10, // 10 minutes
+      cacheTime: 1000 * 60 * 30, // 30 minutes
     });
 
   const { data: bookmarkedSeriesData, isLoading: isLoadingBookmarkedSeries } =
     useQuery({
-      queryKey: ["bookmarkedSeries", bookmarks],
+      queryKey: ["bookmarkedSeries", memoizedBookmarks.join(",")],
       queryFn: async () => {
-        if (!bookmarks || bookmarks.length === 0) return [];
+        if (!memoizedBookmarks || memoizedBookmarks.length === 0) return [];
 
-        const seriesPromises = bookmarks.map(async (bookmarkId) => {
+        const seriesPromises = memoizedBookmarks.map(async (bookmarkId) => {
           try {
             const series = await fetchContentById(bookmarkId);
             if (series && series.imdbID && series.Type === "series") {
@@ -86,7 +90,9 @@ export default function Bookmarks() {
           (series): series is ContentItem => series !== null,
         );
       },
-      enabled: bookmarks.length > 0,
+      enabled: memoizedBookmarks.length > 0,
+      staleTime: 1000 * 60 * 10, // 10 minutes
+      cacheTime: 1000 * 60 * 30, // 30 minutes
     });
 
   const displayMovies = searchTerm ? searchMovies : bookmarkedMoviesData;

@@ -1,10 +1,29 @@
+/**
+ * Navigation Bar Component
+ *
+ * This component provides the main navigation for the entertainment app.
+ * It displays a responsive sidebar with navigation icons and user avatar.
+ *
+ * Key features:
+ * - Responsive design (mobile horizontal, desktop vertical)
+ * - Active state management for navigation items
+ * - Icon-based navigation with active/inactive states
+ * - User avatar display
+ * - Accessibility labels for screen readers
+ */
+
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import "@/app/globals.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import React from "react";
 
+/**
+ * Navigation items configuration
+ * Each item has an ID, default icon, and active icon for visual feedback
+ */
 const navItems = [
   {
     id: "home",
@@ -28,15 +47,25 @@ const navItems = [
   },
 ];
 
-export default function Navbar() {
+/**
+ * Navbar component that renders the main navigation
+ * @returns JSX.Element - Navigation bar with icons and user avatar
+ */
+function Navbar() {
+  // State to track which navigation item is currently active
   const [active, setActive] = useState("home");
 
+  /**
+   * Handles navigation item clicks and updates active state
+   * @param id - The ID of the clicked navigation item
+   */
   const handleClick = (id) => {
     setActive(id);
   };
 
   return (
     <nav className="relative bg-[#161d2f] px-4 py-4.5 xl:pt-[33px] flex xl:flex-col justify-between items-center xl:mb-8 md:rounded-[20px]">
+      {/* Site logo - links to home page */}
       <Link onClick={() => setActive("home")} href="/" aria-label="Home">
         <Image
           className="w-[25px] h-[20px] md:w-8 md:h-[25px]"
@@ -46,7 +75,11 @@ export default function Navbar() {
           src="/images/logo.svg"
         />
       </Link>
+
+      {/* Spacer div for desktop layout */}
       <div className="xl:h-[72px] hidden xl:block"></div>
+
+      {/* Navigation items list */}
       <ul className="flex gap-6 xl:gap-10 xl:flex-col xl:absolute xl:left-[38px] xl:top-[131px]">
         {navItems.map((item) => (
           <li key={item.id}>
@@ -67,6 +100,7 @@ export default function Navbar() {
         ))}
       </ul>
 
+      {/* User avatar - placeholder link for profile functionality */}
       <Link href="/public" aria-label="Home">
         <Image
           className="w-6 h-6 md:w-8 md:h-8"
@@ -79,3 +113,6 @@ export default function Navbar() {
     </nav>
   );
 }
+
+// Memoize the component to prevent unnecessary re-renders
+export default React.memo(Navbar);

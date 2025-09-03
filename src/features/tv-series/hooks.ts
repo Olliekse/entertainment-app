@@ -47,5 +47,7 @@ export function useSeries(type: string, searchTerm?: string) {
       }
     },
     enabled: true,
+    staleTime: searchTerm ? 1000 * 60 * 2 : 1000 * 60 * 10, // 2 min for search, 10 min for regular
+    gcTime: 1000 * 60 * 30, // 30 minutes
   });
 }

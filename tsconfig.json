@@ -1,27 +1,44 @@
 {
   "compilerOptions": {
+    // Target ECMAScript version for compilation
     "target": "ES2017",
+    // Library files to include (DOM, DOM iterables, latest ECMAScript)
     "lib": ["dom", "dom.iterable", "esnext"],
+    // Allow JavaScript files alongside TypeScript
     "allowJs": true,
+    // Skip type checking of declaration files for faster compilation
     "skipLibCheck": true,
+    // Enable all strict type checking options
     "strict": true,
+    // Don't emit output files (Next.js handles this)
     "noEmit": true,
+    // Enable CommonJS/AMD/UMD modules to be imported as ES6 modules
     "esModuleInterop": true,
+    // Use ES modules for module resolution
     "module": "esnext",
+    // Use bundler for module resolution (optimized for Next.js)
     "moduleResolution": "bundler",
+    // Allow importing JSON files as modules
     "resolveJsonModule": true,
+    // Ensure each file is treated as a separate module
     "isolatedModules": true,
+    // Preserve JSX syntax for Next.js to handle
     "jsx": "preserve",
+    // Enable incremental compilation for faster rebuilds
     "incremental": true,
+    // Next.js TypeScript plugin for enhanced type checking
     "plugins": [
       {
         "name": "next"
       }
     ],
+    // Path mapping for cleaner imports (e.g., @/components instead of ../../components)
     "paths": {
       "@/*": ["./src/*"]
     }
   },
+  // Files to include in TypeScript compilation
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  // Files to exclude from TypeScript compilation
   "exclude": ["node_modules"]
 }
