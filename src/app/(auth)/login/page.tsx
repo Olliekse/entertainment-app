@@ -90,7 +90,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex flex-col pt-[48px] pb-[172px] justify-center items-center bg-[#10141e] px-6">
+    <div className="flex flex-col pt-[46px] md:pt-[79px] pb-[172px] justify-center items-center bg-[#10141e] px-6">
       {/* Site logo linking to home */}
       <Link href="/">
         <img
@@ -101,14 +101,14 @@ export default function Login() {
       </Link>
 
       {/* Login form container */}
-      <div className="flex flex-col items-center bg-[#161d2f] px-6 py-[29px] md:px-[32px] rounded-[10px]  w-[327px] md:w-[400px] text-white">
-        <h1 className="self-start font-light text-[32px] text-white pb-10">
+      <div className="flex flex-col items-center bg-[#161d2f] px-6 py-[25px] md:py-[27px] md:px-[32px] rounded-[10px]  w-[327px] md:w-[400px] text-white">
+        <h1 className="self-start font-light text-[32px] text-white pb-[35px] md:pb-9">
           Login
         </h1>
 
         {/* Login form */}
         <form
-          className="flex flex-col font-light text-[15px] gap-6 w-full"
+          className="flex flex-col font-light text-[15px] gap-[21px] w-full"
           onSubmit={handleSubmit}
         >
           {/* Email input field with validation */}
@@ -123,7 +123,7 @@ export default function Login() {
               }}
               type="email"
               value={email}
-              className={`border-b pb-4 pl-4 w-full bg-transparent outline-none ${
+              className={`border-b pb-[14px] md:pb-[12px] pl-4 w-full bg-transparent outline-none ${
                 errors.email
                   ? "border-b-[#fc4747] placeholder-white/50"
                   : "border-b-[#5a698f] placeholder-white/50"
@@ -150,7 +150,7 @@ export default function Login() {
               }}
               type="password"
               value={password}
-              className={`border-b pb-4 pl-4 w-full bg-transparent outline-none ${
+              className={`border-b pb-[16px] pl-4 w-full bg-transparent outline-none ${
                 errors.password
                   ? "border-b-[#fc4747] placeholder-white/50"
                   : "border-b-[#5a698f] placeholder-white/50"
@@ -166,11 +166,11 @@ export default function Login() {
           </div>
 
           {/* Submit button and signup link */}
-          <div className="flex flex-col gap-6 w-full items-center">
+          <div className="flex flex-col gap-[21px] w-full items-center">
             <button
               type="submit"
               disabled={loading}
-              className="h-12 bg-[#fc4747] rounded-md text-white w-full mt-4 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="h-12 bg-[#fc4747] rounded-md text-white w-full mt-5 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {loading ? "Logging in..." : "Login to your account"}
             </button>

@@ -57,17 +57,17 @@ export default function Signup() {
   }
 
   return (
-    <div className="flex flex-col pt-[48px] pb-[112px] justify-center items-center bg-[#10141e] px-6">
+    <div className="flex flex-col pt-[48px] md:pt-[80px] pb-[112px] justify-center items-center bg-[#10141e] px-6">
       <Link href="/">
-        <img className="mb-[56px]" src="../images/logo.svg" alt="site icon" />
+        <img className="mb-[56px] md:mb-[76px]" src="../images/logo.svg" alt="site icon" />
       </Link>
-      <div className="flex flex-col items-center bg-[#161d2f] px-6 py-[29px] md:px-[32px] rounded-[10px]  w-[327px] md:w-[400px]">
-        <h1 className="self-start font-light text-[32px] text-white pb-10">
+      <div className="flex flex-col items-center bg-[#161d2f] px-6 py-[26px] md:py-[30px] md:px-[32px] rounded-[10px]  w-[327px] md:w-[400px]">
+        <h1 className="self-start font-light text-[32px] text-white pb-8 md:pb-9">
           Sign Up
         </h1>
         <form
           onSubmit={handleSubmit}
-          className="bg-[#161d2f] text-white flex flex-col font-light text-[15px] gap-6 w-full"
+          className="bg-[#161d2f] text-white flex flex-col font-light text-[15px] gap-6 md:gap-[22px] w-full"
         >
           <div className="relative">
             <input
@@ -79,7 +79,7 @@ export default function Signup() {
               }}
               type="email"
               value={email}
-              className={`border-b pb-4 pl-4 w-full bg-transparent outline-none ${
+              className={`border-b pb-[14px] md:pb-[13px] pl-4 w-full bg-transparent outline-none ${
                 errors.email
                   ? "border-b-[#fc4747] placeholder-white/50"
                   : "border-b-[#5a698f] placeholder-white/50"
@@ -110,7 +110,7 @@ export default function Signup() {
               }}
               type="password"
               value={password}
-              className={`border-b pb-4 pl-4 w-full bg-transparent outline-none ${
+              className={`border-b pb-[13px] pl-4 w-full bg-transparent outline-none ${
                 errors.password
                   ? "border-b-[#fc4747] placeholder-white/50"
                   : "border-b-[#5a698f] placeholder-white/50"
@@ -134,7 +134,7 @@ export default function Signup() {
               }}
               type="password"
               value={repeatPassword}
-              className={`border-b pb-4 pl-4 w-full bg-transparent outline-none ${
+              className={`border-b pb-[13px] pl-4 w-full bg-transparent outline-none ${
                 errors.repeatPassword
                   ? "border-b-[#fc4747] placeholder-white/50"
                   : "border-b-[#5a698f] placeholder-white/50"
@@ -152,11 +152,11 @@ export default function Signup() {
             <button
               type="submit"
               disabled={loading}
-              className="cursor-pointer h-12 bg-[#fc4747] rounded-md text-white w-full mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="cursor-pointer h-12 bg-[#fc4747] rounded-md text-white w-full mt-4 md:mt-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? "Creating account..." : "Create an account"}
             </button>
-            <p className="font-light text-[15px] text-white">
+            <p className="font-light text-[15px] text-white tracking-tight">
               Already have an account?{" "}
               <Link
                 href="/login"
