@@ -77,10 +77,10 @@ function Navbar() {
       </Link>
 
       {/* Spacer div for desktop layout */}
-      <div className="xl:h-[72px] hidden xl:block"></div>
+      <div className="xl:h-[835px] hidden xl:block"></div>
 
       {/* Navigation items list */}
-      <ul className="flex gap-6 xl:gap-10 xl:flex-col xl:absolute xl:left-[38px] xl:top-[131px]">
+      <ul className="flex gap-6 md:gap-8 xl:gap-10 xl:flex-col xl:absolute xl:left-[39px] xl:top-[130px]">
         {navItems.map((item) => (
           <li key={item.id}>
             <Link

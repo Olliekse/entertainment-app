@@ -1,217 +1,82 @@
-import Image from "next/image";
-import React from "react";
+/**
+ * Recommended Component
+ *
+ * This component displays a grid of recommended movies and TV series.
+ * It randomly selects content from the local data.json file, excluding
+ * trending content to provide variety and personalization.
+ *
+ * Key features:
+ * - Randomly selects non-trending content from local data
+ * - Uses MediaCard components for consistency
+ * - Responsive grid layout
+ * - Loading and error states
+ * - Memoized for performance
+ */
 
+"use client";
+
+import MediaCard from "@/components/ui/MediaCard";
+import { ContentItem } from "@/lib/types";
+import React, { useMemo } from "react";
+import data from "@/lib/data.json";
+
+/**
+ * Recommended component that displays randomly selected content
+ * @returns JSX.Element - Grid of recommended content cards
+ */
 function Recommended() {
+  // Transform local data to ContentItem format and randomly select recommended content
+  const recommendedContent = useMemo(() => {
+    try {
+      // Filter out trending content and transform to ContentItem format
+      const nonTrendingContent = data
+        .filter((item) => !item.isTrending)
+        .map(
+          (item) =>
+            ({
+              title: item.title,
+              year: item.year,
+              imdbID: item.title.toLowerCase().replace(/\s+/g, "-"), // Generate a unique ID
+              type:
+                item.category.toLowerCase() === "movie" ? "movie" : "series",
+              poster: `/images/thumbnails/${item.title.toLowerCase().replace(/\s+/g, "-")}/regular/small.jpg`,
+              rating: item.rating,
+              isBookmarked: item.isBookmarked,
+            }) as ContentItem
+        );
+
+      // Randomly shuffle the array and take first 6-8 items
+      const shuffled = [...nonTrendingContent].sort(() => Math.random() - 0.5);
+      return shuffled.slice(0, Math.floor(Math.random() * 3) + 6); // 6-8 items
+    } catch (error) {
+      console.error("Error processing recommended content:", error);
+      return [];
+    }
+  }, []);
+
+  // Show loading state while processing data
+  if (recommendedContent.length === 0) {
+    return (
+      <div className="pt-[20px] px-4 md:px-0">
+        <h1 className="font-light text-xl text-white md:text-[32px]">
+          Recommended for you
+        </h1>
+        <p className="text-white pt-6">Loading recommendations...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="pt-6 px-4 md:px-0 ">
-      <h1 className="font-light text-xl text-white md:text-[32px]">
+    <div className="pt-[24px] md:pt-[37px] xl:pt-[32px] px-4 md:px-0">
+      <h1 className="font-light text-xl text-white md:text-[32px] tracking-tight">
         Recommended for you
       </h1>
-      <div className="pt-6 flex gap-[15px] md:gap-x-[30px] xl:gap-x-[40px] md:gap-y-[24px] flex-wrap">
-        <div className="relative">
-          <Image
-            priority
-            className="rounded-lg object-cover h-[110px] w-[164px] md:h-[140px] md:w-[220px] xl:h-[174px] xl:w-[280px]"
-            width={164}
-            height={110}
-            src="/images/thumbnails/the-great-lands/regular/small.jpg"
-            alt="movie cover"
-          />
-          <div className="w-[32px] h-[32px] rounded-full bg-[#10141E] opacity-50 absolute top-2 right-2 flex items-center justify-center">
-            <Image
-              alt="bookmark button"
-              src="/images/icon-bookmark-empty.svg"
-              width={11}
-              height={14}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="font-light text-[12px] md:text-[13px] text-white opacity-75 flex gap-2 pt-2">
-              <span>2019</span>•
-              <Image
-                className="object-contain"
-                width={12}
-                height={12}
-                alt="movie icon"
-                src="/images/icon-category-movie.svg"
-              />
-              <span>Movie</span>•<span>E</span>
-            </div>
-            <p className="font-medium text-[15px] md:text-[18px] text-white">
-              The Great Lands
-            </p>
-          </div>
-        </div>
-        <div className="relative">
-          <Image
-            priority
-            className="rounded-lg object-cover h-[110px] w-[164px] md:h-[140px] md:w-[220px] xl:h-[174px] xl:w-[280px]"
-            width={164}
-            height={110}
-            src="/images/thumbnails/the-diary/regular/small.jpg"
-            alt="movie cover"
-          />
-          <div className="w-[32px] h-[32px] rounded-full bg-[#10141E] opacity-50 absolute top-2 right-2 flex items-center justify-center">
-            <Image
-              alt="bookmark button"
-              src="/images/icon-bookmark-empty.svg"
-              width={11}
-              height={14}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="font-light text-[12px] md:text-[13px] text-white opacity-75 flex gap-2 pt-2">
-              <span>2019</span>•
-              <Image
-                className="object-contain"
-                width={12}
-                height={12}
-                alt="movie icon"
-                src="/images/icon-category-movie.svg"
-              />
-              <span>Movie</span>•<span>PG</span>
-            </div>
-            <p className="font-medium text-[15px] md:text-[18px]  text-white">
-              The Diary
-            </p>
-          </div>
-        </div>
-        <div className="relative">
-          <Image
-            priority
-            className="rounded-lg object-cover h-[110px] w-[164px] md:h-[140px] md:w-[220px] xl:h-[174px] xl:w-[280px]"
-            width={164}
-            height={110}
-            src="/images/thumbnails/the-great-lands/regular/small.jpg"
-            alt="movie cover"
-          />
-          <div className="w-[32px] h-[32px] rounded-full bg-[#10141E] opacity-50 absolute top-2 right-2 flex items-center justify-center">
-            <Image
-              alt="bookmark button"
-              src="/images/icon-bookmark-empty.svg"
-              width={11}
-              height={14}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="font-light text-[12px] md:text-[13px] text-white opacity-75 flex gap-2 pt-2">
-              <span>2019</span>•
-              <Image
-                className="object-contain"
-                width={12}
-                height={12}
-                alt="movie icon"
-                src="/images/icon-category-movie.svg"
-              />
-              <span>Movie</span>•<span>E</span>
-            </div>
-            <p className="font-medium text-[15px] md:text-[18px]  text-white">
-              The Great Lands
-            </p>
-          </div>
-        </div>
-        <div className="relative">
-          <Image
-            priority
-            className="rounded-lg object-cover h-[110px] w-[164px] md:h-[140px] md:w-[220px] xl:h-[174px] xl:w-[280px]"
-            width={164}
-            height={110}
-            src="/images/thumbnails/the-great-lands/regular/small.jpg"
-            alt="movie cover"
-          />
-          <div className="w-[32px] h-[32px] rounded-full bg-[#10141E] opacity-50 absolute top-2 right-2 flex items-center justify-center">
-            <Image
-              alt="bookmark button"
-              src="/images/icon-bookmark-empty.svg"
-              width={11}
-              height={14}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="font-light text-[12px] md:text-[13px] text-white opacity-75 flex gap-2 pt-2">
-              <span>2019</span>•
-              <Image
-                className="object-contain"
-                width={12}
-                height={12}
-                alt="movie icon"
-                src="/images/icon-category-movie.svg"
-              />
-              <span>Movie</span>•<span>E</span>
-            </div>
-            <p className="font-medium text-[15px] md:text-[18px]  text-white">
-              The Great Lands
-            </p>
-          </div>
-        </div>
-        <div className="relative">
-          <Image
-            priority
-            className="rounded-lg object-cover h-[110px] w-[164px] md:h-[140px] md:w-[220px] xl:h-[174px] xl:w-[280px]"
-            width={164}
-            height={110}
-            src="/images/thumbnails/the-great-lands/regular/small.jpg"
-            alt="movie cover"
-          />
-          <div className="w-[32px] h-[32px] rounded-full bg-[#10141E] opacity-50 absolute top-2 right-2 flex items-center justify-center">
-            <Image
-              alt="bookmark button"
-              src="/images/icon-bookmark-empty.svg"
-              width={11}
-              height={14}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="font-light text-[12px] md:text-[13px] text-white opacity-75 flex gap-2 pt-2">
-              <span>2019</span>•
-              <Image
-                className="object-contain"
-                width={12}
-                height={12}
-                alt="movie icon"
-                src="/images/icon-category-movie.svg"
-              />
-              <span>Movie</span>•<span>E</span>
-            </div>
-            <p className="font-medium text-[15px] md:text-[18px]  text-white">
-              The Great Lands
-            </p>
-          </div>
-        </div>
-        <div className="relative">
-          <Image
-            priority
-            className="rounded-lg object-cover h-[110px] w-[164px] md:h-[140px] md:w-[220px] xl:h-[174px] xl:w-[280px]"
-            width={164}
-            height={110}
-            src="/images/thumbnails/the-great-lands/regular/small.jpg"
-            alt="movie cover"
-          />
-          <div className="w-[32px] h-[32px] rounded-full bg-[#10141E] opacity-50 absolute top-2 right-2 flex items-center justify-center">
-            <Image
-              alt="bookmark button"
-              src="/images/icon-bookmark-empty.svg"
-              width={11}
-              height={14}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="font-light text-[12px] md:text-[13px] text-white opacity-75 flex gap-2 pt-2">
-              <span>2019</span>•
-              <Image
-                className="object-contain"
-                width={12}
-                height={12}
-                alt="movie icon"
-                src="/images/icon-category-movie.svg"
-              />
-              <span>Movie</span>•<span>E</span>
-            </div>
-            <p className="font-medium text-[15px] md:text-[18px]  text-white">
-              The Great Lands
-            </p>
-          </div>
-        </div>
+
+      {/* Responsive grid layout for recommended content */}
+      <div className="pt-5 md:pt-6 xl:pt-8 md:pb-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-[15px] gap-y-[8px] md:gap-x-[30px] xl:gap-x-[40px] md:gap-y-[24px] xl:gap-y-[13px]">
+        {recommendedContent.map((item) => (
+          <MediaCard key={item.imdbID} item={item} />
+        ))}
       </div>
     </div>
   );

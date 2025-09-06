@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+/* Set Outfit as the default font family for all elements */
+* {
+  font-family: "Outfit", sans-serif;
+}

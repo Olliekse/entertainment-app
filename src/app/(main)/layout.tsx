@@ -66,7 +66,7 @@ export default function MainLayout({
         - Desktop: Sidebar + main content with grid layout
         - Extra large: Additional padding and gap adjustments
       */}
-      <div className="h-screen md:p-6 xl:px-8 xl:pb-0 xl:grid xl:grid-cols-[96px_1fr] xl:gap-[36px]">
+      <div className="h-screen md:p-6 xl:pt-[32px] xl:px-8 xl:pb-0 xl:grid xl:grid-cols-[96px_1fr] xl:gap-[36px]">
         {/* Navigation sidebar - fixed width on desktop */}
         <Navbar />
         {/* Main content area with scrollable overflow */}

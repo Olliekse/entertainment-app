@@ -1,7 +1,15 @@
 import { useBookmarksStore } from "@/features/bookmarks/useBookmarksStore";
 import { useEffect, useCallback } from "react";
 
-export default function BookmarkButton({ id }: { id: string }) {
+interface BookmarkButtonProps {
+  id: string;
+  variant?: "trending" | "recommended";
+}
+
+export default function BookmarkButton({
+  id,
+  variant = "recommended",
+}: BookmarkButtonProps) {
   const { bookmarks, setBookmarks, toggleBookmark } = useBookmarksStore();
   const isBookmarked = bookmarks.includes(id);
 
@@ -28,10 +36,21 @@ export default function BookmarkButton({ id }: { id: string }) {
     toggleBookmark(id);
   }, [toggleBookmark, id]);
 
+  // Different positioning based on variant
+  const getPositionClasses = () => {
+    if (variant === "trending") {
+      // For trending cards: position higher to avoid bottom overlay content
+      return "absolute top-[8px] md:top-[16px] xl:top-[10px] right-[8px] md:right-[25px] xl:right-[25px]";
+    } else {
+      // For recommended cards: standard positioning
+      return "absolute top-[7px] md:top-[13px] xl:top-[14px] right-[10px] md:right-[17px] xl:right-[18px]";
+    }
+  };
+
   return (
     <button
       onClick={handleToggle}
-      className="absolute top-2 right-2 p-2 bg-black/50 rounded-full transition-all duration-200 cursor-pointer"
+      className={`${getPositionClasses()} p-2 bg-black/50 rounded-full transition-all duration-200 cursor-pointer`}
     >
       <img
         src={

@@ -97,11 +97,13 @@ function TrendingCarousel() {
 
   // Render trending movies carousel
   return (
-    <div className="pl-4">
-      <h1 className="font-light text-xl text-white md:text-[32px]">Trending</h1>
+    <div className="pl-4 md:pl-0">
+      <h1 className="font-light text-xl text-white md:text-[32px] md:tracking-normal">
+        Trending
+      </h1>
 
       {/* Horizontal scrollable container for movie cards */}
-      <div className="flex gap-4 overflow-x-auto pt-4">
+      <div className="flex gap-4 md:gap-10 overflow-x-auto pt-4 md:pt-[22px] xl:pt-[25px]">
         {movies.map((movie) => (
           <MediaCard key={movie.imdbID} item={movie} type="trending" />
         ))}

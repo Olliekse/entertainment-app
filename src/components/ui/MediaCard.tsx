@@ -14,14 +14,14 @@ export default function MediaCard({ item, type }: MediaCardProps) {
 
   return (
     <div
-      className={`${type === "trending" ? "w-[240px] md:w-[470px] relative" : "w-[164px]"} rounded-lg hover:bg-[#1f2937] transition-colors duration-200 flex-shrink-0`}
+      className={`${type === "trending" ? "w-[240px] md:w-[470px] relative" : "w-[164px] md:w-[220px] xl:w-[280px]"} rounded-lg hover:bg-[#1f2937] transition-colors duration-200 flex-shrink-0`}
     >
       <div className="relative">
         {item.poster && item.poster !== "N/A" ? (
           <img
             src={item.poster}
             alt={item.title}
-            className={`w-full ${type === "trending" ? "h-[140px] md:h-[230px]" : "h-[110px]"} object-cover rounded-lg`}
+            className={`w-full ${type === "trending" ? "h-[140px] md:h-[230px]" : "h-[110px] md:h-[140px] xl:h-[174px]"} object-cover rounded-lg`}
           />
         ) : (
           <div className="w-full h-48 bg-gray-700 flex items-center justify-center">
@@ -29,7 +29,10 @@ export default function MediaCard({ item, type }: MediaCardProps) {
           </div>
         )}
 
-        <BookmarkButton id={item.imdbID} />
+        <BookmarkButton
+          id={item.imdbID}
+          variant={type === "trending" ? "trending" : "recommended"}
+        />
 
         {type === "trending" && (
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-lg pointer-events-none" />
@@ -37,8 +40,8 @@ export default function MediaCard({ item, type }: MediaCardProps) {
       </div>
 
       {type === "trending" ? (
-        <div className="absolute bottom-4 left-4 right-4 z-10">
-          <div className="flex items-center gap-2 font-light text-[11px] text-white opacity-75 mb-2">
+        <div className="absolute bottom-3 md:bottom-5 left-4 md:left-6 right-4 z-10">
+          <div className="flex items-center gap-[9px] md:gap-[7px] font-light text-[11px] md:text-[15px] text-white opacity-75 pb-2 md:pb-0 xl:pb-[7px]">
             <span>{item.year}</span>
             <span>•</span>
             <Image
@@ -50,25 +53,25 @@ export default function MediaCard({ item, type }: MediaCardProps) {
             />
             <span className="capitalize">{item.type}</span>
           </div>
-          <h3 className="font-medium text-[14px] text-white line-clamp-2">
+          <h3 className="font-medium text-[14px] md:text-[24px] text-white line-clamp-2">
             {item.title}
           </h3>
         </div>
       ) : (
         <div>
-          <div className="pt-2 flex items-center gap-2 font-light text-[11px] text-white opacity-75">
+          <div className="pt-2 pb-1 flex items-center gap-[8px] md:gap-[11px] xl:gap-[10px] md:tracking-wide xl:tracking-wider font-light text-[11px] text-white opacity-75">
             <span>{item.year}</span>
             <span>•</span>
             <Image
               className="object-contain"
-              width={12}
-              height={12}
+              width={10}
+              height={10}
               alt="movie icon"
               src="/images/icon-category-movie.svg"
             />
             <span className="capitalize">{item.type}</span>
           </div>
-          <h3 className="font-medium text-[14px] text-white mb-2 line-clamp-2">
+          <h3 className="font-medium text-[14px] xl:text-[18px] text-white mb-2 line-clamp-2">
             {item.title}
           </h3>
         </div>
