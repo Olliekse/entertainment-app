@@ -2,6 +2,10 @@
 
 A modern entertainment application built with Next.js, featuring movie and TV series browsing, user authentication, and bookmarking functionality. This app provides a Netflix-like experience with trending content, search capabilities, and personalized bookmarking.
 
+## Live site
+
+https://entertainment-app-livid.vercel.app
+
 ## Features
 
 - **User Authentication**: Secure login/signup with NextAuth.js and bcryptjs password hashing
