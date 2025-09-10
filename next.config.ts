@@ -17,13 +17,28 @@ import type { NextConfig } from "next";
  * Defines framework settings and build options
  */
 const nextConfig: NextConfig = {
-  /* 
-    Configuration options can be added here:
-    - images: { domains: ['example.com'] }
-    - env: { CUSTOM_KEY: 'value' }
-    - experimental: { features: {} }
-    - webpack: (config) => { return config; }
-  */
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "m.media-amazon.com",
+        port: "",
+        pathname: "/images/**",
+      },
+      {
+        protocol: "https",
+        hostname: "image.tmdb.org",
+        port: "",
+        pathname: "/t/p/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.themoviedb.org",
+        port: "",
+        pathname: "/t/p/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
