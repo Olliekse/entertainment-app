@@ -59,7 +59,7 @@ function Navbar() {
    * Handles navigation item clicks and updates active state
    * @param id - The ID of the clicked navigation item
    */
-  const handleClick = (id) => {
+  const handleClick = (id: string) => {
     setActive(id);
   };
 

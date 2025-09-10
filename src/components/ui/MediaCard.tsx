@@ -18,9 +18,11 @@ export default function MediaCard({ item, type }: MediaCardProps) {
     >
       <div className="relative">
         {item.poster && item.poster !== "N/A" ? (
-          <img
+          <Image
             src={item.poster}
             alt={item.title}
+            width={type === "trending" ? 470 : 280}
+            height={type === "trending" ? 230 : 174}
             className={`w-full ${type === "trending" ? "h-[140px] md:h-[230px]" : "h-[110px] md:h-[140px] xl:h-[174px]"} object-cover rounded-lg`}
           />
         ) : (

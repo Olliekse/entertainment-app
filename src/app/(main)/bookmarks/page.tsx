@@ -58,7 +58,7 @@ export default function Bookmarks() {
       },
       enabled: memoizedBookmarks.length > 0,
       staleTime: 1000 * 60 * 10, // 10 minutes
-      cacheTime: 1000 * 60 * 30, // 30 minutes
+      gcTime: 1000 * 60 * 30, // 30 minutes
     });
 
   const { data: bookmarkedSeriesData, isLoading: isLoadingBookmarkedSeries } =
@@ -87,12 +87,12 @@ export default function Bookmarks() {
 
         const results = await Promise.all(seriesPromises);
         return results.filter(
-          (series): series is ContentItem => series !== null,
+          (series): series is ContentItem => series !== null
         );
       },
       enabled: memoizedBookmarks.length > 0,
       staleTime: 1000 * 60 * 10, // 10 minutes
-      cacheTime: 1000 * 60 * 30, // 30 minutes
+      gcTime: 1000 * 60 * 30, // 30 minutes
     });
 
   const displayMovies = searchTerm ? searchMovies : bookmarkedMoviesData;

@@ -35,7 +35,7 @@ function Recommended() {
           (item) =>
             ({
               title: item.title,
-              year: item.year,
+              year: item.year.toString(),
               imdbID: item.title.toLowerCase().replace(/\s+/g, "-"), // Generate a unique ID
               type:
                 item.category.toLowerCase() === "movie" ? "movie" : "series",

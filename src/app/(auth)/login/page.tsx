@@ -19,6 +19,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 
 /**
  * Login page component for user authentication
@@ -93,10 +94,12 @@ export default function Login() {
     <div className="flex flex-col pt-[46px] md:pt-[79px] pb-[172px] justify-center items-center bg-[#10141e] px-6">
       {/* Site logo linking to home */}
       <Link href="/">
-        <img
+        <Image
           className="mb-[56px] md:mb-[80px]"
-          src="../images/logo.svg"
+          src="/images/logo.svg"
           alt="site icon"
+          width={32}
+          height={25}
         />
       </Link>
 

@@ -17,6 +17,21 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { getUserByEmail } from "./users";
 import { compare } from "bcryptjs";
 
+// Extend NextAuth types to include custom user properties
+declare module "next-auth" {
+  interface User {
+    id: string;
+  }
+
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+    };
+  }
+}
+
 /**
  * NextAuth configuration object
  * Defines authentication providers, session strategy, and callbacks
@@ -73,7 +88,7 @@ export const authOptions: NextAuthOptions = {
      */
     async jwt({ token, user }) {
       // Add user ID to token when user first logs in
-      if (user) token.id = (user as any).id;
+      if (user) token.id = user.id;
       return token;
     },
     /**
@@ -82,7 +97,7 @@ export const authOptions: NextAuthOptions = {
      */
     async session({ session, token }) {
       // Add user ID from token to session user object
-      if (session.user && token?.id) (session.user as any).id = token.id;
+      if (session.user && token?.id) session.user.id = token.id as string;
       return session;
     },
   },

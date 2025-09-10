@@ -8,22 +8,38 @@ export function useMovies(type: string, searchTerm?: string) {
     queryFn: async () => {
       if (searchTerm && searchTerm.trim() !== "") {
         const results = await searchContent(searchTerm, type);
-        return results.map((item: any) => ({
-          title: item.Title,
-          year: item.Year,
-          imdbID: item.imdbID,
-          type: item.Type,
-          poster: item.Poster,
-        })) as ContentItem[];
+        return results.map(
+          (item: {
+            Title: string;
+            Year: string;
+            imdbID: string;
+            Type: string;
+            Poster: string;
+          }) => ({
+            title: item.Title,
+            year: item.Year,
+            imdbID: item.imdbID,
+            type: item.Type,
+            poster: item.Poster,
+          })
+        ) as ContentItem[];
       } else {
         const results = await fetchMovies(type);
-        return results.map((item: any) => ({
-          title: item.Title,
-          year: item.Year,
-          imdbID: item.imdbID,
-          type: item.Type,
-          poster: item.Poster,
-        })) as ContentItem[];
+        return results.map(
+          (item: {
+            Title: string;
+            Year: string;
+            imdbID: string;
+            Type: string;
+            Poster: string;
+          }) => ({
+            title: item.Title,
+            year: item.Year,
+            imdbID: item.imdbID,
+            type: item.Type,
+            poster: item.Poster,
+          })
+        ) as ContentItem[];
       }
     },
     enabled: true,

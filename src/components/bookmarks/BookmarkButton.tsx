@@ -1,5 +1,6 @@
 import { useBookmarksStore } from "@/features/bookmarks/useBookmarksStore";
 import { useEffect, useCallback } from "react";
+import Image from "next/image";
 
 interface BookmarkButtonProps {
   id: string;
@@ -52,13 +53,15 @@ export default function BookmarkButton({
       onClick={handleToggle}
       className={`${getPositionClasses()} p-2 bg-black/50 rounded-full transition-all duration-200 cursor-pointer`}
     >
-      <img
+      <Image
         src={
           isBookmarked
             ? "/images/icon-bookmark-full.svg"
             : "/images/icon-bookmark-empty.svg"
         }
         alt={isBookmarked ? "Remove from bookmarks" : "Add to bookmarks"}
+        width={13}
+        height={16}
         className="w-[13px] h-4"
       />
     </button>

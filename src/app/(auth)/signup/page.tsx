@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -59,7 +60,13 @@ export default function Signup() {
   return (
     <div className="flex flex-col pt-[48px] md:pt-[80px] pb-[112px] justify-center items-center bg-[#10141e] px-6">
       <Link href="/">
-        <img className="mb-[56px] md:mb-[76px]" src="../images/logo.svg" alt="site icon" />
+        <Image
+          className="mb-[56px] md:mb-[76px]"
+          src="/images/logo.svg"
+          alt="site icon"
+          width={32}
+          height={25}
+        />
       </Link>
       <div className="flex flex-col items-center bg-[#161d2f] px-6 py-[26px] md:py-[30px] md:px-[32px] rounded-[10px]  w-[327px] md:w-[400px]">
         <h1 className="self-start font-light text-[32px] text-white pb-8 md:pb-9">
