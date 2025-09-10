@@ -28,7 +28,7 @@ export function useSeries(type: string, searchTerm?: string) {
           })
         ) as ContentItem[];
       } else {
-        const results = await fetchTVSeries(type);
+        const results = await fetchTVSeries();
         return results.map(
           (item: {
             Title: string;

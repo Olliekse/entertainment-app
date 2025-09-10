@@ -7,7 +7,12 @@ import { useSeries } from "@/features/tv-series/hooks";
 
 export default function Series() {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const { data: series, isLoading, isError, error } = useSeries(searchTerm);
+  const {
+    data: series,
+    isLoading,
+    isError,
+    error,
+  } = useSeries("series", searchTerm);
 
   return (
     <div className="px-4 md:px-0">

@@ -52,16 +52,15 @@ export async function fetchMovies(type: string) {
 }
 
 /**
- * Fetches TV series from OMDB API based on type
- * @param type - The type of content to fetch ("movie", "series", "episode")
+ * Fetches TV series from OMDB API
  * @returns Promise<Array> - Array of TV series objects
  * @throws Error - If API request fails or no TV series found
  */
-export async function fetchTVSeries(type: string) {
+export async function fetchTVSeries() {
   try {
     // Make API request to OMDB for series content
     const res = await fetch(
-      `${BASE_URL}?apikey=${API_KEY}&s=series&type=${type}`
+      `${BASE_URL}?apikey=${API_KEY}&s=series&type=series`
     );
 
     // Check if HTTP request was successful
